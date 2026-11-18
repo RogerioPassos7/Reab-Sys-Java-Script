@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#349469" />
+        <title>Agenda | ReabSYS</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="../assets/images/logo/ReabSYS_iconeBranco.png"
+        />
+        <link rel="stylesheet" href="../css/app.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/ui.js" defer></script>
+        <script src="../js/agenda.js" defer></script>
+    </head>
+    <body data-page="agenda">
+        <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+        <aside class="app-sidebar" data-navigation></aside>
+        <main class="app-main" id="main-content">
+            <noscript
+                ><p class="error-message">
+                    Ative o JavaScript para utilizar esta demonstração.
+                </p></noscript
+            >
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Cada encontro importa</p>
+                    <h1>Agenda</h1>
+                    <p class="page-description">
+                        Planeje as próximas sessões e acompanhe os atendimentos.
+                    </p>
+                </div>
+                <a class="button button-secondary" href="pacientes.html"
+                    >Ver pacientes</a
+                >
+            </header>
+            <div class="demo-notice">
+                <strong>Demonstração acadêmica.</strong> Use apenas dados
+                fictícios. Os registros ficam salvos neste navegador.
+            </div>
+            <p id="app-error" class="error-message" role="alert" hidden></p>
+
+            <div class="workspace-grid">
+                <section
+                    class="panel form-panel"
+                    aria-labelledby="session-form-title"
+                >
+                    <h2 id="session-form-title">Agendar sessão</h2>
+                    <p class="form-help">
+                        Todos os campos são obrigatórios. Horários seguem o
+                        relógio local do seu dispositivo.
+                    </p>
+                    <p id="no-patients" class="error-message" hidden>
+                        Cadastre um
+                        <a href="pacientes.html">paciente ativo</a> para agendar
+                        uma sessão.
+                    </p>
+                    <form id="session-form" novalidate>
+                        <div class="field">
+                            <label for="session-patient">Paciente *</label
+                            ><select
+                                id="session-patient"
+                                name="patientId"
+                                required
+                            >
+                                <option value="">Selecione um paciente</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="session-date">Data *</label
+                            ><input
+                                id="session-date"
+                                name="date"
+                                type="date"
+                                required
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="session-time">Horário *</label
+                            ><input
+                                id="session-time"
+                                name="time"
+                                type="time"
+                                required
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="session-type">Tipo de sessão *</label
+                            ><select id="session-type" name="type" required>
+                                <option value="Avaliação">Avaliação</option>
+                                <option value="Fisioterapia">
+                                    Fisioterapia
+                                </option>
+                                <option value="Retorno">Retorno</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="session-duration"
+                                >Duração em minutos *</label
+                            ><input
+                                id="session-duration"
+                                name="duration"
+                                type="number"
+                                min="15"
+                                max="120"
+                                step="5"
+                                value="50"
+                                required
+                                aria-describedby="duration-help"
+                            /><small id="duration-help"
+                                >De 15 a 120 minutos, em intervalos de 5.</small
+                            >
+                        </div>
+                        <p
+                            id="session-form-error"
+                            class="error-message"
+                            role="alert"
+                            hidden
+                        ></p>
+                        <button
+                            id="save-session"
+                            class="button button-primary button-full"
+                            type="submit"
+                        >
+                            Agendar sessão
+                        </button>
+                    </form>
+                </section>
+                <section class="panel" aria-labelledby="sessions-heading">
+                    <h2 id="sessions-heading">Sessões e histórico</h2>
+                    <div class="filters agenda-filters">
+                        <div class="field">
+                            <label for="session-search">Paciente</label
+                            ><input
+                                id="session-search"
+                                type="search"
+                                placeholder="Pesquisar por nome"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="session-date-filter">Data</label
+                            ><input id="session-date-filter" type="date" />
+                        </div>
+                        <div class="field">
+                            <label for="session-status-filter">Situação</label
+                            ><select id="session-status-filter">
+                                <option value="">Todas</option>
+                                <option value="agendada">Agendadas</option>
+                                <option value="concluida">Concluídas</option>
+                                <option value="cancelada">Canceladas</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="filter-summary">
+                        <span
+                            id="session-count"
+                            role="status"
+                            aria-live="polite"
+                        ></span
+                        ><button
+                            id="clear-session-filters"
+                            type="button"
+                            class="button button-link button-small"
+                        >
+                            Limpar filtros
+                        </button>
+                    </div>
+                    <div id="session-list" class="session-list"></div>
+                </section>
+            </div>
+        </main>
+        <div
+            id="app-toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+        ></div>
+
+        <dialog
+            id="cancel-dialog"
+            aria-labelledby="cancel-title"
+            aria-describedby="cancel-description"
+        >
+            <h2 id="cancel-title">Cancelar sessão?</h2>
+            <p id="cancel-description"></p>
+            <div class="dialog-actions">
+                <button
+                    id="keep-session"
+                    class="button button-secondary"
+                    type="button"
+                    autofocus
+                >
+                    Manter sessão</button
+                ><button
+                    id="confirm-cancel"
+                    class="button button-danger"
+                    type="button"
+                >
+                    Cancelar sessão
+                </button>
+            </div>
+        </dialog>
+    </body>
+</html>

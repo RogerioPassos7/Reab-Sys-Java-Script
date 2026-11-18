@@ -1,0 +1,822 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    background: linear-gradient(to bottom,
+            rgb(254, 255, 252) 0%,
+            rgb(200, 211, 189) 75%,
+            #000000 75%,
+            #000000 100%);
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 80px;
+
+    background-color: #349469;
+
+    z-index: 1000;
+}
+
+#logoReabSYS {
+    width: 300px;
+    height: 100px;
+    object-fit: contain;
+}
+
+.navHeader {
+    width: 100%;
+    height: 80px;
+
+    display: flex;
+    align-items: center;
+}
+
+.navLogo {
+    margin-left: 4%;
+}
+
+.navLogo:hover {
+    cursor: pointer;
+}
+
+.navLinks {
+    display: flex;
+    gap: 90px;
+    margin-left: 5%;
+}
+
+.navConta {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    margin-left: auto;
+    margin-right: 5%;
+}
+
+.navLinks a,
+.navConta a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+}
+
+.navLinks a:hover,
+.navConta a:hover {
+    transform: scale(1.05);
+}
+
+#Entrar {
+    width: 150px;
+    height: 50px;
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+
+    border: 1px solid rgba(0, 0, 0, 0.247);
+    border-radius: 30px;
+
+    background-color: white;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#Entrar:hover {
+    transform: scale(1.05);
+}
+
+.hero {
+    width: 100%;
+    min-height: calc(100vh - 20px);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 90px 100px 10px 100px;
+    box-sizing: border-box;
+}
+
+.heroTexto {
+    width: 55%;
+}
+
+.heroTexto h1 {
+    max-width: 850px;
+
+    font-size: 62px;
+    font-weight: 600;
+
+    line-height: 1.08;
+
+    letter-spacing: -2px;
+
+    margin: 0 0 32px 0;
+}
+
+#acompanhamento {
+    background: linear-gradient(to right, #349469, #72eeb2);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+}
+
+#fisioterapeutico {
+    background: linear-gradient(to right, #72eeb2, #349469);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.heroTexto p {
+    font-size: 15px;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 0 30px 0;
+    color: #667;
+}
+
+.btnComecar {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #111;
+    text-decoration: none;
+    width: 230px;
+    height: 62px;
+
+    border: none;
+    border-radius: 50px;
+
+    background: linear-gradient(30deg, #62eaa8 50%, #349469 100%);
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 23px;
+
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btnComecar:hover {
+    transform: scale(1.05);
+}
+
+.heroImagem {
+    position: relative;
+    width: 38%;
+}
+
+.heroImagem::after {
+    content: "";
+    position: absolute;
+
+    top: -8px;
+    left: -8px;
+    right: -8px;
+    bottom: -8px;
+
+    border: 2px solid transparent;
+    border-radius: 33px;
+
+    background: linear-gradient(to right,
+            #349469,
+            #62eaa8) border-box;
+
+    -webkit-mask:
+        linear-gradient(#fff 0 0) padding-box,
+        linear-gradient(#fff 0 0);
+
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+
+    pointer-events: none;
+}
+
+.heroImagem img {
+    width: 100%;
+    height: 380px;
+    object-fit: cover;
+
+    border-radius: 25px;
+    display: block;
+}
+
+.exercicios-section {
+    width: 100%;
+    padding: 70px 0;
+    background-color: #ffffff;
+    border-radius: 30px;
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+}
+
+.exercicios-container {
+    width: 100%;
+    max-width: 1550px;
+    margin: 0 auto;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+
+
+.exercicio-card {
+    position: relative;
+
+    width: 220px;
+    height: 440px;
+
+    border: 2px solid #5bd27f;
+    border-radius: 65px;
+    overflow: hidden;
+
+    flex-shrink: 0;
+
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+
+}
+
+
+.exercicio-card:hover {
+    transform: translateX(8px);
+    box-shadow: -12px 0px 0px #5bd27f;
+}
+
+
+
+
+.exercicio-card img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+}
+
+
+
+.exercicio-info {
+    position: absolute;
+
+    left: 20px;
+    bottom: 32px;
+
+    width: 250px;
+    min-height: 135px;
+
+    padding: 24px 30px;
+
+    box-sizing: border-box;
+
+    background-color: #5bd27f;
+
+    border-radius: 35px;
+
+    color: #ffffff;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+}
+
+
+.exercicio-info h3 {
+    margin: 0;
+
+    font-size: 25px;
+    font-weight: 600;
+    line-height: 1.1;
+}
+
+
+
+.exercicio-info p {
+    margin: 2px 0 0;
+
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 1.1;
+}
+
+#monitoramento {
+    margin-right: 100px;
+    padding-left: 7px;
+}
+
+
+
+.footer {
+    width: 100%;
+    background-color: #000000;
+    color: white;
+    box-sizing: border-box;
+}
+
+
+.footerContainer {
+    width: 98%;
+    margin: 0 auto;
+
+    min-height: 210px;
+
+    display: grid;
+    grid-template-columns: 2fr 1.3fr 1.5fr 1.5fr;
+    align-items: start;
+
+    padding-top: 35px;
+    padding-bottom: 30px;
+    box-sizing: border-box;
+}
+
+
+.footerBrand {
+    display: flex;
+    align-items: flex-start;
+}
+
+#logoFooter {
+    width: 220px;
+    height: auto;
+    display: block;
+}
+
+
+.footerColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.footerColumn h3 {
+    margin: 0 0 5px 0;
+
+    color: #5bd486;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.footerColumn a {
+    color: white;
+    text-decoration: none;
+
+    font-size: 16px;
+    font-weight: 400;
+
+    transition: 0.2s;
+}
+
+.footerColumn a:hover {
+    color: #5bd486;
+    transform: translateX(3px);
+}
+
+
+.footerBottom {
+    width: 94%;
+    margin: 0 auto;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.7);
+
+    min-height: 70px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.footerBottom p {
+    margin: 0;
+
+    font-size: 15px;
+}
+
+.footerLegal {
+    display: flex;
+    gap: 30px;
+}
+
+.footerLegal a {
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footerLegal a:hover {
+    color: #5bd486;
+}
+
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+.menuHamburguer {
+    display: none;
+}
+
+
+@media (max-width: 768px) {
+    .header {
+        height: auto;
+        min-height: 70px;
+    }
+
+    .navHeader {
+        width: 100%;
+        height: auto;
+        min-height: 70px;
+
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+
+        padding: 5px 15px;
+        gap: 0;
+    }
+
+    .navLogo {
+        width: auto;
+        height: 60px;
+        margin: 0;
+
+        display: flex;
+        align-items: center;
+        overflow: visible;
+    }
+
+    #logoReabSYS {
+        width: 175px;
+        height: 65px;
+        object-fit: contain;
+    }
+
+    .menuHamburguer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+
+        flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+        padding: 8px;
+
+        background: transparent;
+        border: none;
+        cursor: pointer;
+    }
+
+    .menuHamburguer span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background-color: white;
+        border-radius: 3px;
+
+        transition: transform 0.3s ease,
+            opacity 0.3s ease;
+    }
+
+    .navHeader.menu-aberto .menuHamburguer span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
+    }
+
+    .navHeader.menu-aberto .menuHamburguer span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navHeader.menu-aberto .menuHamburguer span:nth-child(3) {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .navLinks,
+    .navConta {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        margin: 0;
+        gap: 0;
+
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        visibility: hidden;
+        transform: translateY(-10px);
+
+        transition:
+            max-height 0.4s ease,
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
+    }
+
+    .navHeader.menu-aberto .navLinks {
+        max-height: 250px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        padding-top: 10px;
+    }
+
+    .navHeader.menu-aberto .navConta {
+        max-height: 180px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        padding: 3px 0px 10px 0px;
+        gap: 10px;
+    }
+
+    .navLinks a,
+    .navConta a {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    #Entrar {
+        width: 130px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .hero {
+        width: 100%;
+        padding: 150px 25px 50px 25px;
+        flex-direction: column;
+        text-align: center;
+        gap: 35px;
+    }
+
+    .heroTexto {
+        width: 100%;
+    }
+
+    .heroTexto h1 {
+        font-size: clamp(40px, 8vw, 60px);
+        line-height: 1.2;
+        margin-bottom: 18px;
+        font-weight: 700;
+
+    }
+
+    .heroTexto p {
+        font-size: 14px;
+        line-height: 1.6;
+        margin-bottom: 25px;
+        text-align: justify;
+    }
+
+    .btnComecar {
+        width: 190px;
+        height: 54px;
+        font-size: 18px;
+    }
+
+
+    .heroImagem {
+        width: 100%;
+        max-width: 450px;
+    }
+
+    .heroImagem img {
+        width: 100%;
+        height: 280px;
+        border-radius: 22px;
+    }
+
+    .heroImagem::after {
+        border-radius: 30px;
+    }
+
+    .exercicios-section {
+        padding: 50px 20px;
+        border-radius: 25px;
+    }
+
+    .exercicios-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        width: 100%;
+        padding: 0;
+        gap: 30px;
+    }
+
+    .exercicio-card {
+        width: 280px;
+        max-width: 100%;
+        height: 420px;
+        flex-shrink: 0;
+    }
+
+    .exercicio-info {
+        left: 15px;
+        bottom: 25px;
+        width: calc(100% - 30px);
+        min-height: 120px;
+        padding: 20px 25px;
+        border-radius: 30px;
+    }
+
+    .exercicio-info h3 {
+        font-size: 22px;
+    }
+
+    .exercicio-info p {
+        margin: 2px 0 0;
+
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.1;
+        text-align: justify;
+    }
+
+    .footerContainer {
+        width: 90%;
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding-top: 35px;
+        padding-bottom: 30px;
+    }
+
+    .footerBrand {
+        justify-content: center;
+    }
+
+    #logoFooter {
+        width: 190px;
+    }
+
+    .footerColumn {
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footerColumn h3 {
+        font-size: 15px;
+    }
+
+    .footerColumn a {
+        font-size: 14px;
+    }
+
+    .footerBottom {
+        width: 90%;
+        min-height: auto;
+        padding: 20px 0;
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+
+    .footerBottom p {
+        font-size: 13px;
+    }
+
+    .footerLegal {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .footerLegal a {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .header {
+        height: auto;
+        min-height: 70px;
+    }
+
+    .navHeader {
+        height: auto;
+        min-height: 70px;
+        flex-wrap: wrap;
+        padding: 5px 15px;
+    }
+
+    .navLogo {
+        height: 60px;
+        display: flex;
+        align-items: center;
+        overflow: visible;
+    }
+
+    #logoReabSYS {
+        width: 175px;
+        height: 65px;
+        object-fit: contain;
+    }
+
+    .menuHamburguer {
+        flex-shrink: 0;
+        width: 45px;
+        height: 45px;
+    }
+
+
+    .navLinks,
+    .navConta {
+        width: 100%;
+    }
+
+    .navHeader.menu-aberto .navLinks {
+        max-height: 250px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        padding-top: 10px;
+    }
+
+    .navHeader.menu-aberto .navConta {
+        max-height: 180px;
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+        padding: 3px 0px 10px 0px;
+        gap: 10px;
+    }
+
+    .navLinks a,
+    .navConta a {
+        font-size: 20px;
+        padding: 10px;
+    }
+
+    #Entrar {
+        width: 130px;
+        height: 42px;
+        font-size: 16px;
+    }
+
+    .hero {
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+    .heroTexto h1 {
+        font-size: 40px;
+    }
+
+    .exercicio-card {
+        width: 280px;
+        max-width: 100%;
+        height: 420px;
+        flex-shrink: 0;
+    }
+
+    .exercicio-info p {
+        margin: 2px 0 0;
+
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 1.1;
+        text-align: justify;
+    }
+
+
+    /* #monitoramento {
+    margin-right: 50px;
+    padding-left: 25px;
+} */
+
+}

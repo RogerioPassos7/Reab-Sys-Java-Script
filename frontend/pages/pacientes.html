@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#349469" />
+        <title>Pacientes | ReabSYS</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="../assets/images/logo/ReabSYS_iconeBranco.png"
+        />
+        <link rel="stylesheet" href="../css/app.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/ui.js" defer></script>
+        <script src="../js/patients.js" defer></script>
+    </head>
+    <body data-page="patients">
+        <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+        <aside class="app-sidebar" data-navigation></aside>
+        <main class="app-main" id="main-content">
+            <noscript
+                ><p class="error-message">
+                    Ative o JavaScript para utilizar esta demonstração.
+                </p></noscript
+            >
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Pessoas em primeiro lugar</p>
+                    <h1>Pacientes</h1>
+                    <p class="page-description">
+                        Organize os cadastros e dê continuidade ao
+                        acompanhamento.
+                    </p>
+                </div>
+                <button
+                    type="button"
+                    id="new-patient"
+                    class="button button-primary"
+                >
+                    + Novo paciente
+                </button>
+            </header>
+            <div class="demo-notice">
+                <strong>Demonstração acadêmica.</strong> Use apenas dados
+                fictícios. Os registros ficam salvos neste navegador.
+            </div>
+            <p id="app-error" class="error-message" role="alert" hidden></p>
+
+            <div class="workspace-grid">
+                <section class="panel form-panel" aria-labelledby="form-title">
+                    <h2 id="form-title">Novo paciente</h2>
+                    <p class="form-help">Campos com * são obrigatórios.</p>
+                    <form id="patient-form" novalidate>
+                        <input type="hidden" name="id" value="" />
+                        <div class="field">
+                            <label for="patient-name">Nome completo *</label
+                            ><input
+                                id="patient-name"
+                                name="name"
+                                required
+                                minlength="3"
+                                maxlength="100"
+                                autocomplete="name"
+                                placeholder="Ex.: Ana Oliveira"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="patient-email">E-mail *</label
+                            ><input
+                                id="patient-email"
+                                name="email"
+                                type="email"
+                                required
+                                maxlength="120"
+                                autocomplete="email"
+                                placeholder="ana@example.com"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="patient-phone">Telefone</label
+                            ><input
+                                id="patient-phone"
+                                name="phone"
+                                type="tel"
+                                maxlength="25"
+                                autocomplete="tel"
+                                aria-describedby="phone-help"
+                                placeholder="(11) 99999-0000"
+                            /><small id="phone-help"
+                                >Opcional. Inclua o DDD.</small
+                            >
+                        </div>
+                        <div class="field">
+                            <label for="patient-condition"
+                                >Acompanhamento *</label
+                            ><input
+                                id="patient-condition"
+                                name="condition"
+                                required
+                                minlength="3"
+                                maxlength="160"
+                                placeholder="Ex.: Reabilitação do joelho"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="patient-status">Situação *</label
+                            ><select id="patient-status" name="status" required>
+                                <option value="ativo">Ativo</option>
+                                <option value="inativo">Inativo</option>
+                            </select>
+                        </div>
+                        <p
+                            id="patient-form-error"
+                            class="error-message"
+                            role="alert"
+                            hidden
+                        ></p>
+                        <div class="form-actions">
+                            <button
+                                id="save-patient"
+                                class="button button-primary"
+                                type="submit"
+                            >
+                                Cadastrar paciente</button
+                            ><button
+                                id="cancel-edit"
+                                class="button button-secondary"
+                                type="button"
+                                hidden
+                            >
+                                Cancelar edição
+                            </button>
+                        </div>
+                    </form>
+                </section>
+                <section class="panel" aria-labelledby="patients-heading">
+                    <h2 id="patients-heading">Seus pacientes</h2>
+                    <div class="filters">
+                        <div class="field">
+                            <label for="patient-search">Pesquisar</label
+                            ><input
+                                id="patient-search"
+                                type="search"
+                                placeholder="Nome, e-mail ou acompanhamento"
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="patient-filter">Situação</label
+                            ><select id="patient-filter">
+                                <option value="">Todos</option>
+                                <option value="ativo">Ativos</option>
+                                <option value="inativo">Inativos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p
+                        id="patient-count"
+                        class="filter-summary"
+                        role="status"
+                        aria-live="polite"
+                    ></p>
+                    <div id="patient-list" class="patient-list"></div>
+                </section>
+            </div>
+        </main>
+        <div
+            id="app-toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+        ></div>
+
+        <dialog
+            id="delete-dialog"
+            aria-labelledby="delete-title"
+            aria-describedby="delete-description"
+        >
+            <h2 id="delete-title">Excluir paciente?</h2>
+            <p id="delete-description"></p>
+            <div class="dialog-actions">
+                <button
+                    id="cancel-delete"
+                    class="button button-secondary"
+                    type="button"
+                    autofocus
+                >
+                    Manter paciente</button
+                ><button
+                    id="confirm-delete"
+                    class="button button-danger"
+                    type="button"
+                >
+                    Excluir paciente
+                </button>
+            </div>
+        </dialog>
+    </body>
+</html>

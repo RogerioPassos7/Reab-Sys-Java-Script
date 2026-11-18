@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#349469" />
+        <title>Visão geral | ReabSYS</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="../assets/images/logo/ReabSYS_iconeBranco.png"
+        />
+        <link rel="stylesheet" href="../css/app.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/ui.js" defer></script>
+        <script src="../js/dashboard.js" defer></script>
+    </head>
+    <body data-page="dashboard">
+        <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+        <aside class="app-sidebar" data-navigation></aside>
+        <main class="app-main" id="main-content">
+            <noscript
+                ><p class="error-message">
+                    Ative o JavaScript para utilizar esta demonstração.
+                </p></noscript
+            >
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Seu acompanhamento, em um só lugar</p>
+                    <h1>Visão geral</h1>
+                    <p class="page-description">
+                        Organize os próximos passos e mantenha o cuidado por
+                        perto.
+                    </p>
+                </div>
+                <a class="button button-primary" href="agenda.html"
+                    >+ Agendar sessão</a
+                >
+            </header>
+            <div class="demo-notice">
+                <strong>Demonstração acadêmica.</strong> Use apenas dados
+                fictícios. Os registros ficam salvos neste navegador.
+            </div>
+            <p id="app-error" class="error-message" role="alert" hidden></p>
+
+            <p id="dashboard-date" class="page-description"></p>
+            <div class="stats-grid">
+                <article class="stat-card">
+                    <span class="stat-caption">Pessoas</span
+                    ><strong id="active-patients" class="stat-value">—</strong
+                    ><span class="stat-caption">Pacientes ativos</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-caption">Sua agenda</span
+                    ><strong id="today-sessions" class="stat-value">—</strong
+                    ><span class="stat-caption">Sessões hoje</span>
+                </article>
+                <article class="stat-card">
+                    <span class="stat-caption">Continuidade</span
+                    ><strong id="completed-sessions" class="stat-value"
+                        >—</strong
+                    ><span class="stat-caption">Sessões concluídas</span>
+                </article>
+            </div>
+            <div class="dashboard-layout">
+                <section class="panel">
+                    <h2>Vamos manter o cuidado?</h2>
+                    <p class="panel-note">
+                        Pacientes ativos sem uma próxima sessão.
+                    </p>
+                    <div id="attention-list" class="attention-list"></div>
+                </section>
+                <div class="dashboard-column">
+                    <section class="panel">
+                        <h2>Acompanhamento das sessões</h2>
+                        <div class="completion-content">
+                            <div id="completion-ring" class="completion-ring">
+                                <span id="completion-rate">—</span>
+                            </div>
+                            <div class="completion-legend">
+                                <div>
+                                    <span>Concluídas</span
+                                    ><strong id="finished-count">—</strong>
+                                </div>
+                                <div>
+                                    <span>Agendadas</span
+                                    ><strong id="scheduled-count">—</strong>
+                                </div>
+                                <div>
+                                    <span>Canceladas</span
+                                    ><strong id="cancelled-count">—</strong>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="completion-explanation">
+                            Percentual de sessões concluídas sobre concluídas +
+                            agendadas. Cancelamentos ficam fora do cálculo.
+                        </p>
+                    </section>
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <h2>Próximas sessões</h2>
+                            <a href="agenda.html">Ver agenda →</a>
+                        </div>
+                        <div id="upcoming-list" class="upcoming-list"></div>
+                    </section>
+                </div>
+                <div class="dashboard-column dashboard-calendar-column">
+                    <section class="panel" aria-label="Calendário de sessões">
+                        <div class="calendar-controls">
+                            <button
+                                type="button"
+                                id="previous-month"
+                                aria-label="Mês anterior"
+                            >
+                                ‹
+                            </button>
+                            <h2 id="calendar-month" aria-live="polite"></h2>
+                            <button
+                                type="button"
+                                id="next-month"
+                                aria-label="Próximo mês"
+                            >
+                                ›
+                            </button>
+                        </div>
+                        <div class="calendar-weekdays" aria-hidden="true">
+                            <span>Seg</span><span>Ter</span><span>Qua</span
+                            ><span>Qui</span><span>Sex</span><span>Sáb</span
+                            ><span>Dom</span>
+                        </div>
+                        <div id="calendar-days" class="calendar-days"></div>
+                        <p class="calendar-hint">
+                            Um ponto indica sessões agendadas. Selecione um dia
+                            para abrir a agenda.
+                        </p>
+                    </section>
+                    <figure class="care-figure">
+                        <img
+                            class="care-image"
+                            src="../assets/images/imagemInicial.png"
+                            alt="Fisioterapeuta acompanhando um exercício de reabilitação"
+                            loading="lazy"
+                        />
+                        <figcaption class="care-caption">
+                            Tecnologia para aproximar o paciente da sua
+                            reabilitação.
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+        </main>
+        <div
+            id="app-toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+        ></div>
+    </body>
+</html>
