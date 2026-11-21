@@ -98,78 +98,57 @@ img {
 .app-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: 190px;
-    background: var(--green);
+    width: 47px;
+    height: 100dvh;
+    background: #349469;
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 16px 0;
-    z-index: 10;
+    z-index: 100;
+    overflow: hidden;
+    transition: width .25s ease;
 }
+.app-sidebar:hover, .app-sidebar:focus-within { width: 190px; }
 .app-brand {
     display: flex;
     align-items: center;
-    height: 42px;
-    margin: 0 18px 30px;
+    width: 100%;
+    height: 64px;
+    padding-left: 8px;
+    flex-shrink: 0;
 }
-.app-brand img {
-    width: 38px;
-    height: auto;
-}
-.app-nav {
-    display: grid;
-    gap: 0;
-}
+.app-brand img { width: 30px; height: 30px; flex-shrink: 0; }
+.app-nav { display: flex; flex-direction: column; align-items: flex-start; width: 100%; flex-shrink: 0; }
 .app-nav-link {
     display: flex;
-    gap: 13px;
     align-items: center;
-    padding: 19px 20px;
+    width: 190px;
+    height: 54px;
+    padding-left: 12px;
+    flex-shrink: 0;
     color: white;
     text-decoration: none;
-    border-radius: 0;
-    min-height: 67px;
+    transition: background .2s;
 }
-.app-nav-link:hover,
-.app-nav-link[aria-current] {
-    background: rgba(255, 255, 255, 0.17);
+.app-nav-link:hover { background: rgba(255,255,255,.12); }
+.app-nav-link[aria-current] { background: rgba(255,255,255,.10); }
+.app-nav-link > span:last-child {
+    margin-left: 15px;
+    font-size: 13px;
+    font-weight: 400;
+    white-space: nowrap;
+    opacity: 0;
+    transform: translateX(-5px);
+    transition: opacity .2s, transform .2s;
 }
-.app-nav-link[aria-current] {
-    box-shadow: none;
-    font-weight: 600;
-}
-.app-icon {
-    display: inline-flex;
-    flex-shrink: 0;
-    width: 23px;
-    height: 23px;
-}
-.app-icon svg {
-    width: 100%;
-    height: 100%;
-}
-.app-nav-shell {
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-    min-height: 0;
-    overflow-y: auto;
-}
-.app-nav {
-    flex-shrink: 0;
-}
-.app-profile {
-    margin-top: auto;
-    flex-shrink: 0;
-}
-.app-menu-toggle {
-    display: none;
-}
-.app-main {
-    margin-left: 190px;
-    padding: 34px clamp(18px, 3vw, 44px) 40px;
-    max-width: 1800px;
-}
+.app-sidebar:hover .app-nav-link > span:last-child,
+.app-sidebar:focus-within .app-nav-link > span:last-child { opacity: 1; transform: translateX(0); }
+.app-icon { display: inline-flex; width: 22px; height: 22px; min-width: 22px; flex-shrink: 0; }
+.app-icon svg { width: 100%; height: 100%; }
+.app-nav-shell { display: flex; flex-direction: column; flex: 1; min-height: 0; overflow-y: auto; overflow-x: hidden; }
+.app-profile { margin-top: auto; margin-bottom: 10px; }
+.app-menu-toggle { display: none; }
+.app-main { margin-left: 47px; min-height: 100dvh; padding: 17px 30px 30px 34px; max-width: 1800px; }
 .page-header {
     display: flex;
     align-items: center;
@@ -811,18 +790,6 @@ dialog p {
     }
 }
 @media (max-width: 1000px) {
-    .app-sidebar {
-        width: 190px;
-        padding-inline: 0;
-    }
-    .app-main {
-        margin-left: 190px;
-        padding-inline: 22px;
-    }
-    .app-nav-link {
-        padding-inline: 12px;
-        font-size: 13px;
-    }
     .workspace-grid {
         grid-template-columns: minmax(0, 1fr);
     }
@@ -846,6 +813,8 @@ dialog p {
         position: sticky;
         top: 0;
         width: 100%;
+        height: auto;
+        overflow: visible;
         min-height: 72px;
         padding: 10px 18px;
         flex-direction: row;
@@ -854,7 +823,10 @@ dialog p {
         justify-content: space-between;
         box-shadow: 0 2px 8px #0001;
     }
+    .app-sidebar:hover, .app-sidebar:focus-within { width: 100%; }
+    .app-nav-link > span:last-child { opacity: 1; transform: none; }
     .app-brand {
+        padding-left: 0;
         height: 48px;
         width: 40px;
         margin: 0;
@@ -880,10 +852,11 @@ dialog p {
         display: flex;
     }
     .app-profile {
-        margin-top: 12px;
+        margin-top: auto;
     }
     .app-nav-link {
-        min-height: 52px;
+        width: 100%;
+        height: 54px;
         padding: 12px;
     }
     .app-main {

@@ -2,14 +2,13 @@
 (function () {
     'use strict';
     const paths = {
-        home: '<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1Z"/>',
-        users: '<circle cx="9" cy="8" r="3"/><path d="M3 21v-3a6 6 0 0 1 12 0v3m2-16a3 3 0 0 1 0 6m2 10v-3a6 6 0 0 0-2-4"/>',
-        calendar:
-            '<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 11h18m-12 5h2m4 0h2"/>',
-        plans: '<rect x="5" y="5" width="14" height="16" rx="2"/><rect x="9" y="2" width="6" height="5" rx="1"/><path d="M9 12h6m-6 4h6"/>',
-        exercises: '<path d="m6 3 3 3-3 3-3-3m12 9 3 3-3 3-3-3M8 8l8 8M3 9l6-6m6 18 6-6M1 7l4 4m8-10 4 4m-6 14 4 4m4-12 4 4"/>',
-        evolution: '<path d="M4 20V10m5 10v-6m5 6V9m5 11V4M3 7l5-4 5 3 7-5"/>',
-        profile: '<circle cx="12" cy="12" r="10"/><circle cx="12" cy="8" r="3"/><path d="M5 19v-1a7 7 0 0 1 14 0v1"/>',
+        home: "<path d=\"M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8\" />\n  <path d=\"M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z\" />",
+        users: "<path d=\"M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2\" />\n  <path d=\"M16 3.128a4 4 0 0 1 0 7.744\" />\n  <path d=\"M22 21v-2a4 4 0 0 0-3-3.87\" />\n  <circle cx=\"9\" cy=\"7\" r=\"4\" />",
+        calendar: "<path d=\"M8 2v3\" />\n  <path d=\"M16 2v3\" />\n  <rect x=\"3\" y=\"3\" width=\"18\" height=\"18\" rx=\"2\" />\n  <path d=\"M3 9h18\" />\n  <path d=\"M8 13h.01\" />\n  <path d=\"M12 13h.01\" />\n  <path d=\"M16 13h.01\" />\n  <path d=\"M8 17h.01\" />\n  <path d=\"M12 17h.01\" />\n  <path d=\"M16 17h.01\" />",
+        plans: "<rect width=\"8\" height=\"4\" x=\"8\" y=\"2\" rx=\"1\" ry=\"1\" />\n  <path d=\"M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2\" />\n  <path d=\"M12 11h4\" />\n  <path d=\"M12 16h4\" />\n  <path d=\"M8 11h.01\" />\n  <path d=\"M8 16h.01\" />",
+        exercises: "<path d=\"M17.596 12.768a2 2 0 1 0 2.829-2.829l-1.768-1.767a2 2 0 0 0 2.828-2.829l-2.828-2.828a2 2 0 0 0-2.829 2.828l-1.767-1.768a2 2 0 1 0-2.829 2.829z\" />\n  <path d=\"m2.5 21.5 1.4-1.4\" />\n  <path d=\"m20.1 3.9 1.4-1.4\" />\n  <path d=\"M5.343 21.485a2 2 0 1 0 2.829-2.828l1.767 1.768a2 2 0 1 0 2.829-2.829l-6.364-6.364a2 2 0 1 0-2.829 2.829l1.768 1.767a2 2 0 0 0-2.828 2.829z\" />\n  <path d=\"m9.6 14.4 4.8-4.8\" />",
+        evolution: "<path d=\"M12 16v5\" />\n  <path d=\"M16 14.639V21\" />\n  <path d=\"M20 10.656V21\" />\n  <path d=\"m22 3-8.646 8.646a.5.5 0 0 1-.708 0L9.354 8.354a.5.5 0 0 0-.707 0L2 15\" />\n  <path d=\"M4 18.463V21\" />\n  <path d=\"M8 14.656V21\" />",
+        profile: "<path d=\"M17.925 20.056a6 6 0 0 0-11.851.001\" />\n  <circle cx=\"12\" cy=\"11\" r=\"4\" />\n  <circle cx=\"12\" cy=\"12\" r=\"10\" />",
         menu: '<path d="M4 6h16M4 12h16M4 18h16"/>',
         check: '<path d="m5 12 4 4L19 6"/>',
         clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
@@ -23,17 +22,17 @@
     function icon(name) {
         const span = element('span', 'app-icon');
         span.setAttribute('aria-hidden', 'true');
-        span.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.home}</svg>`;
+        span.innerHTML = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">${paths[name] || paths.home}</svg>`;
         return span;
     }
     function setupNavigation() {
         const aside = document.querySelector('[data-navigation]');
         if (!aside) return;
         const brand = element('a', 'app-brand');
-        brand.href = '../index.html';
+        brand.href = 'fisiomenu.html';
         const image = element('img');
         image.src = '../assets/images/logo/ReabSYS_iconeBranco.png';
-        image.alt = 'ReabSYS — página inicial';
+        image.alt = 'ReabSYS — início';
         brand.append(image);
         const toggle = element('button', 'app-menu-toggle');
         toggle.append(icon('menu'), element('span', '', 'Menu'));
