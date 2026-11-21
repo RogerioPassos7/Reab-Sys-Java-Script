@@ -168,15 +168,6 @@ img {
     color: var(--muted);
     margin: 0;
 }
-.demo-notice {
-    border: 1px solid #c6d8c2;
-    background: #f5f8f1;
-    border-radius: 10px;
-    padding: 10px 15px;
-    color: #52604c;
-    font-size: 12px;
-    margin-bottom: 24px;
-}
 .panel,
 .stat-card {
     background: white;
