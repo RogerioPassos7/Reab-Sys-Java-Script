@@ -177,7 +177,7 @@
         }
         if (!validState(state))
             throw new Error(
-                'Os dados locais estão incompatíveis ou corrompidos. Nada foi sobrescrito. Consulte o guia da demonstração.',
+                'Os dados locais estão incompatíveis ou corrompidos. Nada foi sobrescrito.',
             );
         return state;
     }
