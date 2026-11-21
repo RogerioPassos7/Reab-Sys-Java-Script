@@ -1074,3 +1074,7 @@ dialog p {
 .exercise-media .exercise-card-image { height: 180px; }
 .exercise-placeholder { color: var(--muted); text-align: center; padding: 20px; margin: 0; font-size: 12px; }
 #logout { margin-top: 24px; }
+.summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 16px; margin-bottom: 24px; }
+.evolution-summary { padding: 18px; border: 1px solid var(--line); border-radius: 12px; background: #f5f8f2; }
+.evolution-summary h3 { margin-bottom: 10px; }
+.evolution-summary p:last-child { margin-bottom: 0; }

@@ -29,7 +29,8 @@
         const aside = document.querySelector('[data-navigation]');
         if (!aside) return;
         const brand = element('a', 'app-brand');
-        brand.href = 'fisiomenu.html';
+        const patientArea = document.body.dataset.role === 'patient';
+        brand.href = patientArea ? 'paciente-exercicios.html' : 'fisiomenu.html';
         const image = element('img');
         image.src = '../assets/images/logo/ReabSYS_iconeBranco.png';
         image.alt = 'ReabSYS — início';
@@ -42,7 +43,12 @@
         const nav = element('nav', 'app-nav');
         nav.id = 'app-navigation';
         nav.setAttribute('aria-label', 'Navegação principal');
-        const routes = [
+        const routes = patientArea ? [
+            ['patient-exercises', 'paciente-exercicios.html', 'exercises', 'Meus exercícios'],
+            ['patient-record', 'paciente-registro.html', 'plans', 'Enviar registro'],
+            ['patient-agenda', 'paciente-agenda.html', 'calendar', 'Agenda'],
+            ['patient-evolution', 'paciente-evolucao.html', 'evolution', 'Minha evolução'],
+        ] : [
             ['dashboard', 'fisiomenu.html', 'home', 'Início'],
             ['patients', 'pacientes.html', 'users', 'Pacientes'],
             ['agenda', 'agenda.html', 'calendar', 'Agenda'],
@@ -59,9 +65,9 @@
             nav.append(link);
         }
         const profile = element('a', 'app-nav-link app-profile');
-        profile.href = 'perfil.html';
+        profile.href = patientArea ? 'paciente-perfil.html' : 'perfil.html';
         profile.append(icon('profile'), element('span', '', 'Perfil'));
-        if (location.pathname.endsWith('/perfil.html')) profile.setAttribute('aria-current', 'page');
+        if (location.pathname.split('/').pop() === profile.getAttribute('href')) profile.setAttribute('aria-current', 'page');
         const shell = element('div', 'app-nav-shell');
         shell.id = 'app-nav-shell';
         shell.append(nav, profile);
