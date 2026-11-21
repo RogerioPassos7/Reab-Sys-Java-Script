@@ -155,8 +155,13 @@ img {
     min-height: 0;
     overflow-y: auto;
 }
-.app-nav { flex-shrink: 0; }
-.app-profile { margin-top: auto; flex-shrink: 0; }
+.app-nav {
+    flex-shrink: 0;
+}
+.app-profile {
+    margin-top: auto;
+    flex-shrink: 0;
+}
 .app-menu-toggle {
     display: none;
 }
@@ -865,10 +870,22 @@ dialog p {
         min-height: 44px;
         padding: 8px 15px;
     }
-    .app-nav-shell { display: none; flex: 0 0 100%; max-height: calc(100dvh - 85px); margin-top: 10px; }
-    .app-sidebar.is-open .app-nav-shell { display: flex; }
-    .app-profile { margin-top: 12px; }
-    .app-nav-link { min-height: 52px; padding: 12px; }
+    .app-nav-shell {
+        display: none;
+        flex: 0 0 100%;
+        max-height: calc(100dvh - 85px);
+        margin-top: 10px;
+    }
+    .app-sidebar.is-open .app-nav-shell {
+        display: flex;
+    }
+    .app-profile {
+        margin-top: 12px;
+    }
+    .app-nav-link {
+        min-height: 52px;
+        padding: 12px;
+    }
     .app-main {
         margin-left: 0;
         padding: 24px 16px 35px;
@@ -940,8 +957,12 @@ dialog p {
     }
 }
 
-.profile-panel { max-width: 620px; }
-.field textarea { resize: vertical; }
+.profile-panel {
+    max-width: 620px;
+}
+.field textarea {
+    resize: vertical;
+}
 .exercise-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(min(100%, 230px), 1fr));
@@ -961,11 +982,126 @@ dialog p {
     object-fit: cover;
     background: var(--background);
 }
-.exercise-card-content { padding: 18px; display: flex; flex-direction: column; flex: 1; }
-.exercise-card-content .patient-details { flex: 1; }
-.exercise-card-content h3, .plan-exercises { overflow-wrap: anywhere; }
-.exercise-selection { display: flex; align-items: center; gap: 9px; font-size: 12px; cursor: pointer; padding-block: 8px; }
-.exercise-selection input { width: 19px; height: 19px; accent-color: var(--green-dark); flex-shrink: 0; }
-.exercise-selection:has(input:disabled) { opacity: .6; cursor: default; }
-.exercise-preview { width: 100%; height: 160px; object-fit: cover; border-radius: 10px; margin-bottom: 16px; }
-.plan-exercises { padding-left: 20px; font-size: 13px; }
+.exercise-card-content {
+    padding: 18px;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}
+.exercise-card-content .patient-details {
+    flex: 1;
+}
+.exercise-card-content h3,
+.plan-exercises {
+    overflow-wrap: anywhere;
+}
+.exercise-selection {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    cursor: pointer;
+    padding-block: 8px;
+}
+.exercise-selection input {
+    width: 19px;
+    height: 19px;
+    accent-color: var(--green-dark);
+    flex-shrink: 0;
+}
+.exercise-selection:has(input:disabled) {
+    opacity: 0.6;
+    cursor: default;
+}
+.exercise-preview {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 16px;
+}
+.plan-exercises {
+    padding-left: 20px;
+    font-size: 13px;
+}
+
+.patient-picker {
+    display: flex;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+}
+.patient-picker .field {
+    flex: 1;
+    min-width: min(100%, 220px);
+    margin-bottom: 0;
+}
+.pain-charts {
+    display: grid;
+    gap: 24px;
+    min-width: 0;
+}
+.pain-chart {
+    min-width: 0;
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+}
+.pain-chart h3 {
+    margin-bottom: 10px;
+}
+.pain-chart svg {
+    display: block;
+    overflow: visible;
+}
+.chart-grid-line {
+    stroke: var(--line);
+    stroke-width: 1;
+}
+.chart-label {
+    fill: var(--muted);
+    font-size: 12px;
+}
+.pain-line {
+    fill: none;
+    stroke: var(--green);
+    stroke-width: 2.5;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+}
+.pain-point {
+    fill: var(--green-dark);
+    stroke: white;
+    stroke-width: 2;
+}
+.history-table-wrap {
+    overflow-x: auto;
+}
+.history-table {
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 12px;
+    text-align: left;
+}
+.history-table th,
+.history-table td {
+    padding: 12px 10px;
+    border-bottom: 1px solid var(--line);
+    overflow-wrap: anywhere;
+}
+.history-table th {
+    color: var(--muted);
+    font-weight: 500;
+}
+.history-table td:first-child {
+    white-space: nowrap;
+}
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    overflow: hidden;
+    clip-path: inset(50%);
+    white-space: nowrap;
+}

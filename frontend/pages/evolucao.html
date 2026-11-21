@@ -1,26 +1,170 @@
 <!doctype html>
 <html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#3a9468">
-    <title>Evolução | ReabSYS</title>
-    <link rel="icon" type="image/png" href="../assets/images/logo/ReabSYS_iconeBranco.png">
-    <link rel="stylesheet" href="../css/app.css">
-    <script src="../js/store.js" defer></script>
-    <script src="../js/ui.js" defer></script>
-
-</head>
-<body data-page="evolution">
-    <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
-    <aside class="app-sidebar" data-navigation></aside>
-    <main class="app-main" id="main-content">
-        <header class="page-header"><div><p class="eyebrow">Acompanhamento fisioterapêutico</p><h1>Evolução</h1><p class="page-description">Acompanhe os registros de dor dos pacientes.</p></div></header>
-        <p class="demo-notice">Demonstração acadêmica. Use apenas dados fictícios.</p>
-        <noscript><p class="error-message">Ative o JavaScript para utilizar as funcionalidades.</p></noscript>
-        <p id="app-error" class="error-message" role="alert" hidden></p>
-        <section class="panel"><h2>Acompanhamento por paciente</h2><a class="button button-secondary" href="pacientes.html">Ver pacientes</a></section>
-    </main>
-    <div id="app-toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
-</body>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#3a9468" />
+        <title>Evolução | ReabSYS</title>
+        <link
+            rel="icon"
+            type="image/png"
+            href="../assets/images/logo/ReabSYS_iconeBranco.png"
+        />
+        <link rel="stylesheet" href="../css/app.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/ui.js" defer></script>
+        <script src="../js/evolution.js" defer></script>
+    </head>
+    <body data-page="evolution">
+        <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+        <aside class="app-sidebar" data-navigation></aside>
+        <main class="app-main" id="main-content">
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow">Acompanhamento fisioterapêutico</p>
+                    <h1>Evolução</h1>
+                    <p class="page-description">
+                        Acompanhe a dor registrada em cada exercício ao longo do
+                        tempo.
+                    </p>
+                </div>
+            </header>
+            <p class="demo-notice">
+                Demonstração acadêmica. Use apenas dados fictícios.
+            </p>
+            <noscript
+                ><p class="error-message">
+                    Ative o JavaScript para utilizar as funcionalidades.
+                </p></noscript
+            >
+            <p id="app-error" class="error-message" role="alert" hidden></p>
+            <section class="panel patient-picker">
+                <div class="field">
+                    <label for="evolution-patient">Paciente</label
+                    ><select id="evolution-patient">
+                        <option value="">Selecione um paciente</option>
+                    </select>
+                </div>
+                <a
+                    id="manage-assignments"
+                    class="button button-secondary"
+                    href="exercicios.html"
+                    >Gerenciar exercícios</a
+                >
+            </section>
+            <div class="workspace-grid evolution-workspace">
+                <section class="panel form-panel">
+                    <h2>Registrar nível de dor</h2>
+                    <form id="measurement-form">
+                        <div class="field">
+                            <label for="measurement-exercise"
+                                >Exercício atribuído *</label
+                            ><select
+                                id="measurement-exercise"
+                                name="exerciseId"
+                                required
+                            >
+                                <option value="">Selecione um exercício</option>
+                            </select>
+                        </div>
+                        <div class="field">
+                            <label for="measurement-date"
+                                >Data da sessão *</label
+                            ><input
+                                id="measurement-date"
+                                name="date"
+                                type="date"
+                                required
+                            />
+                        </div>
+                        <div class="field">
+                            <label for="measurement-pain"
+                                >Nível de dor (0–10) *</label
+                            ><input
+                                id="measurement-pain"
+                                name="pain"
+                                type="number"
+                                min="0"
+                                max="10"
+                                step="1"
+                                required
+                                aria-describedby="pain-help"
+                            /><small id="pain-help"
+                                >0 = sem dor; 10 = maior dor percebida.</small
+                            >
+                        </div>
+                        <p
+                            id="measurement-error"
+                            class="error-message"
+                            role="alert"
+                            hidden
+                        ></p>
+                        <p id="measurement-hint" class="form-help"></p>
+                        <button
+                            class="button button-primary button-full"
+                            id="save-measurement"
+                            type="submit"
+                            disabled
+                        >
+                            Salvar medição
+                        </button>
+                    </form>
+                </section>
+                <div class="dashboard-column">
+                    <section class="panel">
+                        <div class="field">
+                            <label for="history-exercise"
+                                >Filtrar gráficos e histórico por
+                                exercício</label
+                            ><select id="history-exercise">
+                                <option value="">Todos os exercícios</option>
+                            </select>
+                        </div>
+                        <div id="pain-charts" class="pain-charts"></div>
+                    </section>
+                    <section class="panel">
+                        <div class="panel-heading">
+                            <h2>Histórico de dor</h2>
+                            <span
+                                id="measurement-count"
+                                class="form-help"
+                                role="status"
+                                aria-live="polite"
+                            ></span>
+                        </div>
+                        <p id="history-empty" class="form-help">
+                            Selecione um paciente para consultar os registros.
+                        </p>
+                        <div
+                            class="history-table-wrap"
+                            id="history-table-wrap"
+                            hidden
+                        >
+                            <table class="history-table">
+                                <caption class="sr-only">
+                                    Registros de dor por data e exercício
+                                </caption>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Data da sessão</th>
+                                        <th scope="col">Exercício</th>
+                                        <th scope="col">Dor (0–10)</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="measurement-history"></tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </main>
+        <div
+            id="app-toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+        ></div>
+    </body>
 </html>

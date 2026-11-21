@@ -44,7 +44,7 @@
             pendingDeleteId = patient.id;
             returnFocus = trigger;
             document.getElementById('delete-description').textContent =
-                `Excluir ${patient.name}? ${count ? `As ${count} sessões vinculadas também serão removidas.` : 'O cadastro será removido.'} Essa ação não pode ser desfeita.`;
+                `Excluir ${patient.name}? ${count ? `As ${count} sessões vinculadas também serão removidas.` : 'O cadastro será removido.'} Os exercícios atribuídos e o histórico de dor também serão removidos. Essa ação não pode ser desfeita.`;
             dialog.showModal();
         } catch (exception) {
             UI.error(exception.message);
