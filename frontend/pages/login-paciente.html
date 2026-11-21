@@ -1,3 +1,76 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Login Paciente | ReabSYS</title><link rel="icon" href="../assets/images/logo/ReabSYS_iconeBranco.png"><link rel="stylesheet" href="../css/login.css"><script src="../js/store.js" defer></script><script src="../js/auth.js" defer></script><script src="../js/login.js" defer></script></head>
-<body data-login-role="patient"><main><section class="login-section"><div class="login-div"><div class="logoReabSYS"><img src="../assets/images/logo/logo_ReabSYS_inteiraVerde.png" alt="ReabSYS"></div><h1>Entrar</h1><p class="login-description">Paciente</p><noscript>Ative o JavaScript para entrar.</noscript><form id="login-form"><div class="campo"><label for="login-username">E-mail ou usuário</label><input id="login-username" name="username" type="text" autocomplete="username" required maxlength="120"></div><div class="campo"><label for="login-password">Senha</label><input id="login-password" name="password" type="password" autocomplete="current-password" required></div><div class="campo"><label for="login-patient">Paciente</label><select id="login-patient" name="patientId" required><option value="">Selecione seu nome</option></select></div><p id="login-error" class="login-error" role="alert" hidden></p><button type="submit">Entrar</button></form><p class="login-links"><a href="login.html">Sou fisioterapeuta →</a></p><p class="login-links"><a href="../index.html">← Voltar ao início</a></p></div></section></main></body></html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Login Paciente | ReabSYS</title>
+        <link rel="icon" href="../assets/images/logo/ReabSYS_iconeBranco.png" />
+        <link rel="stylesheet" href="../css/login.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/auth.js" defer></script>
+        <script src="../js/login.js" defer></script>
+    </head>
+    <body data-login-role="patient">
+        <main>
+            <section class="login-section">
+                <div class="login-div">
+                    <div class="logoReabSYS">
+                        <img
+                            src="../assets/images/logo/logo_ReabSYS_inteiraVerde.png"
+                            alt="ReabSYS"
+                        />
+                    </div>
+                    <h1>Entrar</h1>
+                    <p class="login-description">Paciente</p>
+                    <noscript>Ative o JavaScript para entrar.</noscript>
+                    <form id="login-form">
+                        <div class="campo">
+                            <label for="login-username">E-mail ou usuário</label
+                            ><input
+                                id="login-username"
+                                name="username"
+                                type="text"
+                                autocomplete="username"
+                                required
+                                maxlength="120"
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="login-password">Senha</label
+                            ><input
+                                id="login-password"
+                                name="password"
+                                type="password"
+                                autocomplete="current-password"
+                                required
+                            />
+                        </div>
+                        <div class="campo">
+                            <label for="login-patient">Paciente</label
+                            ><select
+                                id="login-patient"
+                                name="patientId"
+                                required
+                            >
+                                <option value="">Selecione seu nome</option>
+                            </select>
+                        </div>
+                        <p
+                            id="login-error"
+                            class="login-error"
+                            role="alert"
+                            hidden
+                        ></p>
+                        <button type="submit">Entrar</button>
+                    </form>
+                    <p class="login-links">
+                        <a href="login.html">Sou fisioterapeuta →</a>
+                    </p>
+                    <p class="login-links">
+                        <a href="../index.html">← Voltar ao início</a>
+                    </p>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>

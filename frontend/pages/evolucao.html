@@ -13,7 +13,7 @@
         <link rel="stylesheet" href="../css/app.css" />
         <script src="../js/store.js" defer></script>
         <script src="../js/auth.js" defer></script>
-    <script src="../js/ui.js" defer></script>
+        <script src="../js/ui.js" defer></script>
         <script src="../js/charts.js" defer></script>
         <script src="../js/evolution.js" defer></script>
     </head>
@@ -74,7 +74,11 @@
                                 aria-live="polite"
                             ></span>
                         </div>
-                        <p class="form-help">Os níveis de dor são registrados pelo paciente. Os anexos são identificados pelo nome; o conteúdo dos arquivos não é armazenado.</p>
+                        <p class="form-help">
+                            Os níveis de dor são registrados pelo paciente. Os
+                            anexos são identificados pelo nome; o conteúdo dos
+                            arquivos não é armazenado.
+                        </p>
                         <p id="history-empty" class="form-help">
                             Selecione um paciente para consultar os registros.
                         </p>
@@ -91,7 +95,9 @@
                                     <tr>
                                         <th scope="col">Data da sessão</th>
                                         <th scope="col">Exercício</th>
-                                        <th scope="col">Dor (0–10)</th><th scope="col">Observação</th><th scope="col">Arquivos informados</th>
+                                        <th scope="col">Dor (0–10)</th>
+                                        <th scope="col">Observação</th>
+                                        <th scope="col">Arquivos informados</th>
                                     </tr>
                                 </thead>
                                 <tbody id="measurement-history"></tbody>

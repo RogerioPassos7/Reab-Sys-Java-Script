@@ -1,1 +1,59 @@
-<!doctype html><html lang="pt-BR"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="theme-color" content="#349469"><title>Agenda | ReabSYS</title><link rel="icon" href="../assets/images/logo/ReabSYS_iconeBranco.png"><link rel="stylesheet" href="../css/app.css"><script src="../js/store.js" defer></script><script src="../js/auth.js" defer></script><script src="../js/ui.js" defer></script><script src="../js/charts.js" defer></script><script src="../js/patient.js" defer></script></head><body data-role="patient" data-patient-page="agenda"><a class="skip-link" href="#main-content">Pular para o conteúdo</a><aside class="app-sidebar" data-navigation></aside><main class="app-main" id="main-content"><header class="page-header"><div><p class="eyebrow" id="patient-greeting">Área do paciente</p><h1>Agenda</h1><p class="page-description">Consulte as sessões organizadas pelo seu fisioterapeuta.</p></div></header><noscript>Ative o JavaScript para utilizar as funcionalidades.</noscript><p id="app-error" class="error-message" role="alert" hidden></p><div class="dashboard-column"><section class="panel"><h2>Próximas consultas</h2><div id="upcoming-sessions" class="patient-list"></div></section><section class="panel"><h2>Consultas passadas</h2><div id="past-sessions" class="patient-list"></div></section><section class="panel"><h2>Consultas canceladas</h2><div id="cancelled-sessions" class="patient-list"></div></section></div></main><div id="app-toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div></body></html>
+<!doctype html>
+<html lang="pt-BR">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#349469" />
+        <title>Agenda | ReabSYS</title>
+        <link rel="icon" href="../assets/images/logo/ReabSYS_iconeBranco.png" />
+        <link rel="stylesheet" href="../css/app.css" />
+        <script src="../js/store.js" defer></script>
+        <script src="../js/auth.js" defer></script>
+        <script src="../js/ui.js" defer></script>
+        <script src="../js/charts.js" defer></script>
+        <script src="../js/patient.js" defer></script>
+    </head>
+    <body data-role="patient" data-patient-page="agenda">
+        <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
+        <aside class="app-sidebar" data-navigation></aside>
+        <main class="app-main" id="main-content">
+            <header class="page-header">
+                <div>
+                    <p class="eyebrow" id="patient-greeting">
+                        Área do paciente
+                    </p>
+                    <h1>Agenda</h1>
+                    <p class="page-description">
+                        Consulte as sessões organizadas pelo seu fisioterapeuta.
+                    </p>
+                </div>
+            </header>
+            <noscript
+                >Ative o JavaScript para utilizar as funcionalidades.</noscript
+            >
+            <p id="app-error" class="error-message" role="alert" hidden></p>
+            <div class="dashboard-column">
+                <section class="panel">
+                    <h2>Próximas consultas</h2>
+                    <div id="upcoming-sessions" class="patient-list"></div>
+                </section>
+                <section class="panel">
+                    <h2>Consultas passadas</h2>
+                    <div id="past-sessions" class="patient-list"></div>
+                </section>
+                <section class="panel">
+                    <h2>Consultas canceladas</h2>
+                    <div id="cancelled-sessions" class="patient-list"></div>
+                </section>
+            </div>
+        </main>
+        <div
+            id="app-toast"
+            class="toast"
+            role="status"
+            aria-live="polite"
+            aria-atomic="true"
+            hidden
+        ></div>
+    </body>
+</html>

@@ -20,7 +20,11 @@
             state.assignments.find((item) => item.patientId === currentPatient)
                 ?.exerciseIds || [];
         const records = state.measurements
-            .filter((item) => item.patientId === currentPatient && item.source === 'patient')
+            .filter(
+                (item) =>
+                    item.patientId === currentPatient &&
+                    item.source === 'patient',
+            )
             .sort(
                 (a, b) =>
                     a.date.localeCompare(b.date) || a.createdAt - b.createdAt,
@@ -69,7 +73,8 @@
                 (item) => !filter.value || item.id === filter.value,
             )) {
                 ReabCharts.drawChart(
-                    charts, exercise,
+                    charts,
+                    exercise,
                     visibleRecords.filter(
                         (item) => item.exerciseId === exercise.id,
                     ),
@@ -91,7 +96,13 @@
                 UI.element('td', '', exercise.name),
                 UI.element('td', '', `${record.pain} / 10`),
                 UI.element('td', '', record.note || '—'),
-                UI.element('td', '', (record.attachments || []).map(file => file.name).join(', ') || '—'),
+                UI.element(
+                    'td',
+                    '',
+                    (record.attachments || [])
+                        .map((file) => file.name)
+                        .join(', ') || '—',
+                ),
             );
             table.append(row);
         }

@@ -343,21 +343,86 @@
         let changed = false;
         if (state.exerciseCatalogVersion !== 2) {
             const catalog = [
-                ['ponte', 'Ponte glútea (bridge)', 'Auxilia no fortalecimento dos glúteos e na estabilidade do quadril e do tronco.', 'ponte.png'],
-                ['parede', 'Agachamento na parede (wall sit)', 'Trabalha a resistência dos quadríceps em uma posição sustentada com apoio na parede.', 'parede.jpg'],
-                ['perna', 'Elevação de perna estendida', 'Auxilia no fortalecimento dos flexores do quadril e no controle do quadríceps, mantendo o joelho estendido.', 'perna-estendida.jpg'],
-                ['isquiotibiais', 'Alongamento de isquiotibiais', 'Trabalha a flexibilidade dos músculos posteriores da coxa.', 'isquiotibiais.jpg'],
-                ['prancha', 'Prancha abdominal', 'Trabalha a resistência da musculatura do tronco e o controle da estabilidade corporal.', 'prancha.jpg'],
-                ['pendulo', 'Exercício do pêndulo (Codman)', 'Favorece movimentos suaves do ombro com o braço relaxado, conforme orientação profissional.', ''],
-            ].map(([key, name, benefit, image]) => ({ id: `ex-${key}`, name, benefit, image: image ? `../assets/exercicios/${image}` : '', builtin: true }));
-            const legacyIds = new Set(['ex-joelho', 'ex-lombar', 'ex-ombro', 'ex-panturrilha', 'ex-equilibrio', 'ex-coluna', 'ex-quadriceps', 'ex-alongamento']);
-            const linked = new Set([...(state.assignments || []).flatMap(item => item.exerciseIds), ...(state.measurements || []).map(item => item.exerciseId)]);
-            const preserved = (state.exercises || []).filter(item => !catalog.some(example => example.id === item.id) && (!legacyIds.has(item.id) || linked.has(item.id))).map(item => ({ ...item, builtin: legacyIds.has(item.id), image: item.image?.includes('/images/exercicios/') ? '' : item.image }));
+                [
+                    'ponte',
+                    'Ponte glútea (bridge)',
+                    'Auxilia no fortalecimento dos glúteos e na estabilidade do quadril e do tronco.',
+                    'ponte.png',
+                ],
+                [
+                    'parede',
+                    'Agachamento na parede (wall sit)',
+                    'Trabalha a resistência dos quadríceps em uma posição sustentada com apoio na parede.',
+                    'parede.jpg',
+                ],
+                [
+                    'perna',
+                    'Elevação de perna estendida',
+                    'Auxilia no fortalecimento dos flexores do quadril e no controle do quadríceps, mantendo o joelho estendido.',
+                    'perna-estendida.jpg',
+                ],
+                [
+                    'isquiotibiais',
+                    'Alongamento de isquiotibiais',
+                    'Trabalha a flexibilidade dos músculos posteriores da coxa.',
+                    'isquiotibiais.jpg',
+                ],
+                [
+                    'prancha',
+                    'Prancha abdominal',
+                    'Trabalha a resistência da musculatura do tronco e o controle da estabilidade corporal.',
+                    'prancha.jpg',
+                ],
+                [
+                    'pendulo',
+                    'Exercício do pêndulo (Codman)',
+                    'Favorece movimentos suaves do ombro com o braço relaxado, conforme orientação profissional.',
+                    '',
+                ],
+            ].map(([key, name, benefit, image]) => ({
+                id: `ex-${key}`,
+                name,
+                benefit,
+                image: image ? `../assets/exercicios/${image}` : '',
+                builtin: true,
+            }));
+            const legacyIds = new Set([
+                'ex-joelho',
+                'ex-lombar',
+                'ex-ombro',
+                'ex-panturrilha',
+                'ex-equilibrio',
+                'ex-coluna',
+                'ex-quadriceps',
+                'ex-alongamento',
+            ]);
+            const linked = new Set([
+                ...(state.assignments || []).flatMap(
+                    (item) => item.exerciseIds,
+                ),
+                ...(state.measurements || []).map((item) => item.exerciseId),
+            ]);
+            const preserved = (state.exercises || [])
+                .filter(
+                    (item) =>
+                        !catalog.some((example) => example.id === item.id) &&
+                        (!legacyIds.has(item.id) || linked.has(item.id)),
+                )
+                .map((item) => ({
+                    ...item,
+                    builtin: legacyIds.has(item.id),
+                    image: item.image?.includes('/images/exercicios/')
+                        ? ''
+                        : item.image,
+                }));
             state.exercises = [...catalog, ...preserved];
             state.exerciseCatalogVersion = 2;
             changed = true;
         }
-        if (!Object.hasOwn(state, 'assignments')) { state.assignments = []; changed = true; }
+        if (!Object.hasOwn(state, 'assignments')) {
+            state.assignments = [];
+            changed = true;
+        }
         return changed;
     }
 
@@ -376,7 +441,8 @@
                 !['name', 'benefit', 'image'].every(
                     (key) => typeof item[key] === 'string',
                 ) ||
-                !(item.builtin && item.image === '') && !validImage(item.image)
+                (!(item.builtin && item.image === '') &&
+                    !validImage(item.image))
             )
                 return false;
             exerciseIds.add(item.id);
@@ -442,7 +508,10 @@
         );
         if (input.id && index < 0)
             throw new Error('Esse exercício foi removido. Atualize a lista.');
-        if (index >= 0 && state.exercises[index].builtin) throw new Error('Somente exercícios criados por você podem ser editados.');
+        if (index >= 0 && state.exercises[index].builtin)
+            throw new Error(
+                'Somente exercícios criados por você podem ser editados.',
+            );
         if (index < 0) state.exercises.push(exercise);
         else state.exercises[index] = exercise;
         write(state);
@@ -452,7 +521,10 @@
     function deleteExercise(exerciseId) {
         ReabAuth.requireRole('therapist');
         const state = read();
-        if (state.exercises.find(item => item.id === exerciseId)?.builtin) throw new Error('Somente exercícios criados por você podem ser removidos.');
+        if (state.exercises.find((item) => item.id === exerciseId)?.builtin)
+            throw new Error(
+                'Somente exercícios criados por você podem ser removidos.',
+            );
         if (!state.exercises.some((item) => item.id === exerciseId))
             throw new Error('O exercício não existe mais.');
         state.exercises = state.exercises.filter(
@@ -526,7 +598,8 @@
 
     function addMeasurement(input) {
         const session = ReabAuth.requireRole('patient');
-        if (session.patientId !== input.patientId) throw new Error('O registro deve pertencer ao paciente conectado.');
+        if (session.patientId !== input.patientId)
+            throw new Error('O registro deve pertencer ao paciente conectado.');
         const state = read();
         const assigned =
             state.assignments.find((item) => item.patientId === input.patientId)
@@ -565,18 +638,43 @@
     }
 
     function attachmentMetadata(files) {
-        if (!Array.isArray(files) || files.length < 1 || files.length > 5) throw new Error('Anexe de 1 a 5 imagens ou vídeos.');
+        if (!Array.isArray(files) || files.length < 1 || files.length > 5)
+            throw new Error('Anexe de 1 a 5 imagens ou vídeos.');
         let total = 0;
-        const metadata = files.map(file => {
-            const image = ['image/jpeg', 'image/png', 'image/webp', 'image/gif'].includes(file.type);
-            const video = ['video/mp4', 'video/webm', 'video/quicktime'].includes(file.type);
-            if (!image && !video) throw new Error('Use imagens JPG, PNG, WebP ou GIF e vídeos MP4, WebM ou MOV.');
+        const metadata = files.map((file) => {
+            const image = [
+                'image/jpeg',
+                'image/png',
+                'image/webp',
+                'image/gif',
+            ].includes(file.type);
+            const video = [
+                'video/mp4',
+                'video/webm',
+                'video/quicktime',
+            ].includes(file.type);
+            if (!image && !video)
+                throw new Error(
+                    'Use imagens JPG, PNG, WebP ou GIF e vídeos MP4, WebM ou MOV.',
+                );
             const limit = (image ? 5 : 25) * 1024 * 1024;
-            if (!Number.isInteger(file.size) || file.size <= 0 || file.size > limit) throw new Error('Cada imagem deve ter até 5 MB e cada vídeo até 25 MB.');
+            if (
+                !Number.isInteger(file.size) ||
+                file.size <= 0 ||
+                file.size > limit
+            )
+                throw new Error(
+                    'Cada imagem deve ter até 5 MB e cada vídeo até 25 MB.',
+                );
             total += file.size;
-            return { name: text(file.name, 200), type: file.type, size: file.size };
+            return {
+                name: text(file.name, 200),
+                type: file.type,
+                size: file.size,
+            };
         });
-        if (total > 50 * 1024 * 1024) throw new Error('O conjunto de arquivos deve ter até 50 MB.');
+        if (total > 50 * 1024 * 1024)
+            throw new Error('O conjunto de arquivos deve ter até 50 MB.');
         return metadata;
     }
 
