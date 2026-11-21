@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+@import url('./fonts.css');
 
 html,
 body {
@@ -14,7 +14,6 @@ body {
     background-color: #c8d3bd;
 }
 
-
 .login-section {
     min-height: 100vh;
 
@@ -24,7 +23,6 @@ body {
 
     padding: 30px 20px;
 }
-
 
 .login-div {
     width: 400px;
@@ -38,8 +36,6 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-
-
 .logoReabSYS {
     display: flex;
     justify-content: center;
@@ -52,8 +48,6 @@ body {
     height: auto;
 }
 
-
-
 h1 {
     margin: 0;
 
@@ -64,8 +58,6 @@ h1 {
 
     color: #173c3c;
 }
-
-
 
 .campo {
     margin-bottom: 16px;
@@ -108,9 +100,8 @@ h1 {
 .campo input:focus {
     border-color: #006f34;
 
-    box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.10);
+    box-shadow: 0 0 0 3px rgba(0, 132, 61, 0.1);
 }
-
 
 button {
     width: 100%;
@@ -138,7 +129,6 @@ button:hover {
     background-color: #006f34;
 }
 
-
 .cadastro {
     margin-top: 20px;
 
@@ -161,12 +151,48 @@ button:hover {
     text-decoration: underline;
 }
 
-.login-description { color: #526457; text-align: center; margin: 10px 0 26px; }
-.login-links { text-align: center; margin: 20px 0 0; font-size: 14px; }
-.login-links a { color: #216747; }
-.login-error { background: #fff2f2; color: #a62f35; padding: 12px; border-radius: 8px; font-size: 13px; }
-.campo select { width: 100%; min-height: 50px; padding: 10px; font: inherit; background: white; border: 2px solid #00843d; border-radius: 10px; }
-[hidden] { display: none !important; }
-a:focus-visible, button:focus-visible { outline: 3px solid #946500; outline-offset: 4px; }
-.login-div { max-width: 100%; }
-@media (max-width: 400px) { .login-div { padding: 25px; } }
+.login-description {
+    color: #526457;
+    text-align: center;
+    margin: 10px 0 26px;
+}
+.login-links {
+    text-align: center;
+    margin: 20px 0 0;
+    font-size: 14px;
+}
+.login-links a {
+    color: #216747;
+}
+.login-error {
+    background: #fff2f2;
+    color: #a62f35;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 13px;
+}
+.campo select {
+    width: 100%;
+    min-height: 50px;
+    padding: 10px;
+    font: inherit;
+    background: white;
+    border: 2px solid #00843d;
+    border-radius: 10px;
+}
+[hidden] {
+    display: none !important;
+}
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid #946500;
+    outline-offset: 4px;
+}
+.login-div {
+    max-width: 100%;
+}
+@media (max-width: 400px) {
+    .login-div {
+        padding: 25px;
+    }
+}
