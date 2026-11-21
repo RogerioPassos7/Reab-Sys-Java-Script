@@ -14,6 +14,7 @@
         <script src="../js/store.js" defer></script>
         <script src="../js/auth.js" defer></script>
     <script src="../js/ui.js" defer></script>
+        <script src="../js/charts.js" defer></script>
         <script src="../js/evolution.js" defer></script>
     </head>
     <body data-role="therapist" data-page="evolution">
@@ -50,64 +51,7 @@
                     >Gerenciar exercícios</a
                 >
             </section>
-            <div class="workspace-grid evolution-workspace">
-                <section class="panel form-panel">
-                    <h2>Registrar nível de dor</h2>
-                    <form id="measurement-form">
-                        <div class="field">
-                            <label for="measurement-exercise"
-                                >Exercício atribuído *</label
-                            ><select
-                                id="measurement-exercise"
-                                name="exerciseId"
-                                required
-                            >
-                                <option value="">Selecione um exercício</option>
-                            </select>
-                        </div>
-                        <div class="field">
-                            <label for="measurement-date"
-                                >Data da sessão *</label
-                            ><input
-                                id="measurement-date"
-                                name="date"
-                                type="date"
-                                required
-                            />
-                        </div>
-                        <div class="field">
-                            <label for="measurement-pain"
-                                >Nível de dor (0–10) *</label
-                            ><input
-                                id="measurement-pain"
-                                name="pain"
-                                type="number"
-                                min="0"
-                                max="10"
-                                step="1"
-                                required
-                                aria-describedby="pain-help"
-                            /><small id="pain-help"
-                                >0 = sem dor; 10 = maior dor percebida.</small
-                            >
-                        </div>
-                        <p
-                            id="measurement-error"
-                            class="error-message"
-                            role="alert"
-                            hidden
-                        ></p>
-                        <p id="measurement-hint" class="form-help"></p>
-                        <button
-                            class="button button-primary button-full"
-                            id="save-measurement"
-                            type="submit"
-                            disabled
-                        >
-                            Salvar medição
-                        </button>
-                    </form>
-                </section>
+            <div>
                 <div class="dashboard-column">
                     <section class="panel">
                         <div class="field">
@@ -130,6 +74,7 @@
                                 aria-live="polite"
                             ></span>
                         </div>
+                        <p class="form-help">Os níveis de dor são registrados pelo paciente. Os anexos são identificados pelo nome; o conteúdo dos arquivos não é armazenado.</p>
                         <p id="history-empty" class="form-help">
                             Selecione um paciente para consultar os registros.
                         </p>
@@ -146,7 +91,7 @@
                                     <tr>
                                         <th scope="col">Data da sessão</th>
                                         <th scope="col">Exercício</th>
-                                        <th scope="col">Dor (0–10)</th>
+                                        <th scope="col">Dor (0–10)</th><th scope="col">Observação</th><th scope="col">Arquivos informados</th>
                                     </tr>
                                 </thead>
                                 <tbody id="measurement-history"></tbody>
