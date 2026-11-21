@@ -8,10 +8,11 @@
     <link rel="icon" type="image/png" href="../assets/images/logo/ReabSYS_iconeBranco.png">
     <link rel="stylesheet" href="../css/app.css">
     <script src="../js/store.js" defer></script>
+    <script src="../js/auth.js" defer></script>
     <script src="../js/ui.js" defer></script>
     <script src="../js/profile.js" defer></script>
 </head>
-<body data-page="profile">
+<body data-role="therapist" data-page="profile">
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
     <aside class="app-sidebar" data-navigation></aside>
     <main class="app-main" id="main-content">
@@ -23,7 +24,7 @@
  <div class="field"><label for="profile-email">E-mail *</label><input id="profile-email" name="email" type="email" required maxlength="120" autocomplete="email"></div>
  <div class="field"><label for="profile-registration">CREFITO</label><input id="profile-registration" name="registration" maxlength="30"></div>
  <button class="button button-primary" type="submit">Salvar perfil</button>
- </form></section>
+ </form><button id="logout" class="button button-secondary" type="button">Sair</button></section>
     </main>
     <div id="app-toast" class="toast" role="status" aria-live="polite" aria-atomic="true" hidden></div>
 </body>

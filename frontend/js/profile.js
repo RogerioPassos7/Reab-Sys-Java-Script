@@ -1,5 +1,6 @@
 (function () {
     'use strict';
+    document.getElementById('logout').addEventListener('click', ReabAuth.logout);
     const key = 'reabsys.profile.v1';
     const form = document.getElementById('profile-form');
     try {
