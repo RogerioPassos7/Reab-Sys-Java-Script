@@ -9,6 +9,8 @@
     const patientSelect = document.getElementById('assignment-patient');
     const search = document.getElementById('exercise-search');
     const list = document.getElementById('exercise-list');
+    const editor = document.getElementById('exercise-editor');
+    const addButton = document.getElementById('add-exercise');
     const saveButton = document.getElementById('save-exercise');
     let draftImage = '';
     let imageVersion = 0;
@@ -35,7 +37,8 @@
         saveButton.disabled = false;
         saveButton.textContent = 'Criar exercício';
         document.getElementById('exercise-form-title').textContent = 'Novo exercício';
-        document.getElementById('cancel-exercise-edit').hidden = true;
+        editor.hidden = true;
+        addButton.setAttribute('aria-expanded', 'false');
         formError.hidden = true;
     }
 
@@ -49,7 +52,8 @@
         showPreview(exercise.image);
         saveButton.textContent = 'Salvar alterações';
         document.getElementById('exercise-form-title').textContent = 'Editar exercício';
-        document.getElementById('cancel-exercise-edit').hidden = false;
+        editor.hidden = false;
+        addButton.setAttribute('aria-expanded', 'true');
         form.elements.name.focus();
     }
 
@@ -68,11 +72,7 @@
         if (!exercises.length) UI.empty(list, 'Nenhum exercício encontrado', 'Ajuste a pesquisa ou crie um exercício.');
         for (const exercise of exercises) {
             const card = UI.element('article', 'exercise-card');
-            const image = UI.element('img', 'exercise-card-image');
-            image.src = exercise.image;
-            image.alt = exercise.name;
-            image.loading = 'lazy';
-            image.addEventListener('error', () => { image.src = '../assets/images/exercicios/exercicio1.png'; }, { once: true });
+            const image = UI.exerciseMedia(exercise);
             const content = UI.element('div', 'exercise-card-content');
             content.append(UI.element('h3', '', exercise.name), UI.element('p', 'patient-details', exercise.benefit));
             const label = UI.element('label', 'exercise-selection');
@@ -98,7 +98,7 @@
                 } catch (error) { UI.error(error.message); }
             });
             remove.setAttribute('aria-label', `Remover ${exercise.name}`);
-            actions.append(editButton, remove);
+            if (!exercise.builtin) actions.append(editButton, remove);
             content.append(label, actions);
             card.append(image, content);
             list.append(card);
@@ -122,6 +122,8 @@
         selected = new Set([...selected].filter(id => state.exercises.some(item => item.id === id)));
         renderCards(state);
     });
+
+    addButton.addEventListener('click', () => { resetForm(); editor.hidden = false; addButton.setAttribute('aria-expanded', 'true'); form.elements.name.focus(); });
 
     imageUrl.addEventListener('input', () => {
         imageVersion++;

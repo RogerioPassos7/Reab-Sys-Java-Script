@@ -16,12 +16,12 @@
     <a class="skip-link" href="#main-content">Pular para o conteúdo</a>
     <aside class="app-sidebar" data-navigation></aside>
     <main class="app-main" id="main-content">
-        <header class="page-header"><div><p class="eyebrow">Acompanhamento fisioterapêutico</p><h1>Exercícios</h1><p class="page-description">Crie exercícios e monte uma seleção para cada paciente.</p></div></header>
+        <header class="page-header"><div><p class="eyebrow">Acompanhamento fisioterapêutico</p><h1>Exercícios</h1><p class="page-description">Crie exercícios e monte uma seleção para cada paciente.</p></div><button id="add-exercise" class="button button-primary" type="button" aria-expanded="false" aria-controls="exercise-editor">Adicionar exercício</button></header>
         <noscript><p class="error-message">Ative o JavaScript para utilizar as funcionalidades.</p></noscript>
         <p id="app-error" class="error-message" role="alert" hidden></p>
 
-<div class="workspace-grid exercise-workspace">
- <section class="panel form-panel" aria-labelledby="exercise-form-title">
+<div class="dashboard-column">
+ <section id="exercise-editor" class="panel" aria-labelledby="exercise-form-title" hidden>
   <h2 id="exercise-form-title">Novo exercício</h2>
   <form id="exercise-form">
    <input name="id" type="hidden">
@@ -31,7 +31,7 @@
    <div class="field"><label for="exercise-image-file">Ou envie uma imagem</label><input id="exercise-image-file" type="file" accept="image/png,image/jpeg,image/webp,image/gif"><small id="image-help">PNG, JPG, WebP ou GIF de até 5 MB. O upload substitui a URL e é reduzido para armazenamento local.</small></div>
    <img id="exercise-preview" class="exercise-preview" alt="Prévia da imagem do exercício" hidden>
    <p id="exercise-form-error" class="error-message" role="alert" hidden></p>
-   <div class="form-actions"><button class="button button-primary" id="save-exercise" type="submit">Criar exercício</button><button class="button button-secondary" id="cancel-exercise-edit" type="button" hidden>Cancelar edição</button></div>
+   <div class="form-actions"><button class="button button-primary" id="save-exercise" type="submit">Criar exercício</button><button class="button button-secondary" id="cancel-exercise-edit" type="button">Cancelar</button></div>
   </form>
  </section>
  <div class="dashboard-column">
@@ -46,7 +46,7 @@
   <section class="panel" aria-labelledby="exercise-library-title">
    <div class="panel-heading"><h2 id="exercise-library-title">Biblioteca de exercícios</h2><span id="exercise-count" class="form-help" role="status"></span></div>
    <div class="field"><label for="exercise-search">Pesquisar exercícios</label><input id="exercise-search" type="search" placeholder="Nome ou benefício"></div>
-   <div id="exercise-list" class="exercise-grid"></div>
+   <div id="exercise-list" class="exercise-grid"></div><a class="form-help" href="../assets/exercicios/CREDITOS.txt" target="_blank" rel="noopener">Créditos das imagens</a>
   </section>
  </div>
 </div>

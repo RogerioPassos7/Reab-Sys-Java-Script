@@ -943,8 +943,8 @@ dialog p {
 .exercise-card-image {
     width: 100%;
     height: 160px;
-    object-fit: cover;
-    background: var(--background);
+    object-fit: contain;
+    background: #f4f7f2;
 }
 .exercise-card-content {
     padding: 18px;
@@ -1069,3 +1069,8 @@ dialog p {
     clip-path: inset(50%);
     white-space: nowrap;
 }
+
+.exercise-media { height: 180px; display: grid; place-items: center; background: #f4f7f2; }
+.exercise-media .exercise-card-image { height: 180px; }
+.exercise-placeholder { color: var(--muted); text-align: center; padding: 20px; margin: 0; font-size: 12px; }
+#logout { margin-top: 24px; }

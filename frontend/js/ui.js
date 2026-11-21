@@ -79,6 +79,18 @@
         });
         aside.append(brand, toggle, shell);
     }
+    function exerciseMedia(exercise) {
+        const box = element('div', 'exercise-media');
+        function placeholder() { box.replaceChildren(element('p', 'exercise-placeholder', 'Foto indisponível para este exercício')); }
+        if (!exercise.image) { placeholder(); return box; }
+        const image = element('img', 'exercise-card-image');
+        image.src = exercise.image;
+        image.alt = exercise.name;
+        image.loading = 'lazy';
+        image.addEventListener('error', placeholder, { once: true });
+        box.append(image);
+        return box;
+    }
     let toastTimer;
     function notify(message) {
         const region = document.getElementById('app-toast');
@@ -145,6 +157,7 @@
     setupNavigation();
     window.ReabUI = Object.freeze({
         element,
+        exerciseMedia,
         icon,
         notify,
         error,
