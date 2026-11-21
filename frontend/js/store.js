@@ -159,6 +159,7 @@
         }
         if (raw === null) {
             const state = seed();
+            initializeExercises(state);
             // A inicialização não emite evento para evitar leituras recursivas.
             try {
                 localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
@@ -179,6 +180,12 @@
             throw new Error(
                 'Os dados locais estão incompatíveis ou corrompidos. Nada foi sobrescrito.',
             );
+        const migrated = initializeExercises(state);
+        if (!validExerciseState(state)) throw new Error('Os dados de exercícios estão inválidos. Nada foi sobrescrito.');
+        if (migrated) {
+            try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); }
+            catch { throw new Error('Não foi possível atualizar os dados locais.'); }
+        }
         return state;
     }
 
@@ -247,6 +254,7 @@
         state.sessions = state.sessions.filter(
             (item) => item.patientId !== patientId,
         );
+        state.assignments = state.assignments.filter(item => item.patientId !== patientId);
         write(state);
     }
 
@@ -315,6 +323,84 @@
         write(state);
     }
 
+    function initializeExercises(state) {
+        let changed = false;
+        if (!Object.hasOwn(state, 'exercises')) {
+            const examples = [
+                ['joelho', 'Mobilidade do joelho', 'Ajuda a melhorar a amplitude de movimento do joelho.'],
+                ['lombar', 'Ponte de quadril', 'Auxilia no fortalecimento dos glúteos e na estabilidade lombar.'],
+                ['ombro', 'Mobilidade do ombro', 'Ajuda a recuperar a amplitude e o controle dos movimentos do ombro.'],
+                ['panturrilha', 'Elevação de calcanhares', 'Auxilia no fortalecimento da panturrilha e na estabilidade do tornozelo.'],
+                ['equilibrio', 'Equilíbrio unipodal', 'Trabalha equilíbrio, coordenação e estabilidade dos membros inferiores.'],
+                ['coluna', 'Mobilidade da coluna', 'Ajuda a melhorar a mobilidade e a consciência corporal.'],
+                ['quadriceps', 'Extensão de joelho', 'Auxilia no fortalecimento do quadríceps e no controle do joelho.'],
+                ['alongamento', 'Alongamento posterior', 'Trabalha a flexibilidade da cadeia posterior e o conforto nos movimentos.'],
+            ];
+            state.exercises = examples.map(([key, name, benefit], index) => ({
+                id: `ex-${key}`, name, benefit,
+                image: `../assets/images/exercicios/${index % 2 ? 'analise_de_movimento' : 'exercicio1'}.png`,
+            }));
+            changed = true;
+        }
+        if (!Object.hasOwn(state, 'assignments')) { state.assignments = []; changed = true; }
+        return changed;
+    }
+
+    function validExerciseState(state) {
+        if (!Array.isArray(state.exercises) || !Array.isArray(state.assignments)) return false;
+        const exerciseIds = new Set();
+        for (const item of state.exercises) {
+            if (!item || typeof item.id !== 'string' || exerciseIds.has(item.id) ||
+                !['name', 'benefit', 'image'].every(key => typeof item[key] === 'string') || !validImage(item.image)) return false;
+            exerciseIds.add(item.id);
+        }
+        const patientIds = new Set(state.patients.map(item => item.id));
+        const assignedPatients = new Set();
+        return state.assignments.every(item => {
+            if (!item || !patientIds.has(item.patientId) || assignedPatients.has(item.patientId) || !Array.isArray(item.exerciseIds) ||
+                new Set(item.exerciseIds).size !== item.exerciseIds.length || !item.exerciseIds.every(id => exerciseIds.has(id))) return false;
+            assignedPatients.add(item.patientId);
+            return true;
+        });
+    }
+
+    function validImage(value) {
+        if (/^data:image\/(png|jpeg|webp|gif);base64,[A-Za-z0-9+/=]+$/.test(value)) return true;
+        try { return ['https:', 'http:'].includes(new URL(value, location.href).protocol); }
+        catch { return false; }
+    }
+
+    function saveExercise(input) {
+        const state = read();
+        const exercise = { id: input.id || id(), name: text(input.name, 100), benefit: text(input.benefit, 400), image: String(input.image || '').trim() };
+        if (exercise.name.length < 3 || exercise.benefit.length < 3) throw new Error('Preencha o nome e o benefício com pelo menos 3 caracteres.');
+        if (!validImage(exercise.image)) throw new Error('Selecione uma imagem ou informe uma URL HTTP ou HTTPS válida.');
+        if (exercise.image.length > 1200000) throw new Error('A imagem é muito grande para o armazenamento local. Escolha uma menor.');
+        const index = state.exercises.findIndex(item => item.id === exercise.id);
+        if (input.id && index < 0) throw new Error('Esse exercício foi removido. Atualize a lista.');
+        if (index < 0) state.exercises.push(exercise); else state.exercises[index] = exercise;
+        write(state);
+        return exercise;
+    }
+
+    function deleteExercise(exerciseId) {
+        const state = read();
+        if (!state.exercises.some(item => item.id === exerciseId)) throw new Error('O exercício não existe mais.');
+        state.exercises = state.exercises.filter(item => item.id !== exerciseId);
+        for (const assignment of state.assignments) assignment.exerciseIds = assignment.exerciseIds.filter(id => id !== exerciseId);
+        write(state);
+    }
+
+    function assignExercises(patientId, exerciseIds) {
+        const state = read();
+        if (!state.patients.some(item => item.id === patientId)) throw new Error('Selecione um paciente válido.');
+        if (!Array.isArray(exerciseIds) || !exerciseIds.every(id => state.exercises.some(item => item.id === id))) throw new Error('A lista de exercícios mudou. Confira a seleção.');
+        const assignment = { patientId, exerciseIds: [...new Set(exerciseIds)] };
+        const index = state.assignments.findIndex(item => item.patientId === patientId);
+        if (index < 0) state.assignments.push(assignment); else state.assignments[index] = assignment;
+        write(state);
+    }
+
     window.ReabStore = Object.freeze({
         STORAGE_KEY,
         read,
@@ -325,5 +411,8 @@
         deletePatient,
         addSession,
         changeSessionStatus,
+        saveExercise,
+        deleteExercise,
+        assignExercises,
     });
 })();
