@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 :root {
-    --green: #349469;
+    --green: #3a9468;
     --green-dark: #216747;
     --background: #e8f0e3;
     --ink: #20382d;
@@ -97,44 +97,44 @@ img {
 .app-sidebar {
     position: fixed;
     inset: 0 auto 0 0;
-    width: 220px;
+    width: 190px;
     background: var(--green);
     color: white;
     display: flex;
     flex-direction: column;
-    padding: 22px 14px;
+    padding: 16px 0;
     z-index: 10;
 }
 .app-brand {
     display: flex;
     align-items: center;
-    height: 68px;
-    margin: 0 8px 35px;
+    height: 42px;
+    margin: 0 18px 30px;
 }
 .app-brand img {
-    width: 180px;
+    width: 38px;
     height: auto;
 }
 .app-nav {
     display: grid;
-    gap: 9px;
+    gap: 0;
 }
 .app-nav-link {
     display: flex;
     gap: 13px;
     align-items: center;
-    padding: 13px 16px;
+    padding: 19px 20px;
     color: white;
     text-decoration: none;
-    border-radius: 10px;
-    min-height: 48px;
+    border-radius: 0;
+    min-height: 67px;
 }
 .app-nav-link:hover,
 .app-nav-link[aria-current] {
     background: rgba(255, 255, 255, 0.17);
 }
 .app-nav-link[aria-current] {
-    box-shadow: inset 3px 0 white;
+    box-shadow: none;
     font-weight: 600;
 }
 .app-icon {
@@ -147,24 +147,20 @@ img {
     width: 100%;
     height: 100%;
 }
-.sidebar-note {
-    margin: auto 15px 20px;
-    max-width: 140px;
-    font-size: 23px;
-    font-weight: 500;
-    line-height: 1.4;
-    opacity: 0.9;
+.app-nav-shell {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
 }
-.app-back {
-    color: white;
-    padding: 12px 16px;
-    font-size: 12px;
-}
+.app-nav { flex-shrink: 0; }
+.app-profile { margin-top: auto; flex-shrink: 0; }
 .app-menu-toggle {
     display: none;
 }
 .app-main {
-    margin-left: 220px;
+    margin-left: 190px;
     padding: 34px clamp(18px, 3vw, 44px) 40px;
     max-width: 1800px;
 }
@@ -808,11 +804,11 @@ dialog p {
 }
 @media (max-width: 1000px) {
     .app-sidebar {
-        width: 185px;
-        padding-inline: 10px;
+        width: 190px;
+        padding-inline: 0;
     }
     .app-main {
-        margin-left: 185px;
+        margin-left: 190px;
         padding-inline: 22px;
     }
     .app-nav-link {
@@ -852,11 +848,13 @@ dialog p {
     }
     .app-brand {
         height: 48px;
-        width: 155px;
+        width: 40px;
         margin: 0;
     }
     .app-menu-toggle {
-        display: block;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
         background: #ffffff20;
         border: 1px solid #ffffff80;
         color: white;
@@ -864,18 +862,10 @@ dialog p {
         min-height: 44px;
         padding: 8px 15px;
     }
-    .app-nav {
-        display: none;
-        width: 100%;
-        margin-top: 12px;
-    }
-    .app-sidebar.is-open .app-nav {
-        display: grid;
-    }
-    .sidebar-note,
-    .app-back {
-        display: none;
-    }
+    .app-nav-shell { display: none; flex: 0 0 100%; max-height: calc(100dvh - 85px); margin-top: 10px; }
+    .app-sidebar.is-open .app-nav-shell { display: flex; }
+    .app-profile { margin-top: 12px; }
+    .app-nav-link { min-height: 52px; padding: 12px; }
     .app-main {
         margin-left: 0;
         padding: 24px 16px 35px;
